@@ -8,7 +8,7 @@ import vizact
 #so a scheduled task must finish before another task is being executed
 def walk(a, pos):
 	walky = vizact.walkTo(pos)
-	yield a.addAction(walky)
+	a.addAction(walky)
 	
 def walka(a,pos):
 	walky = vizact.moveTo(pos)
