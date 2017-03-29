@@ -17,7 +17,7 @@ viz.go()
 viz.MainView.setEuler([180,0,0])
 viz.MainView.setPosition([0,1.3,4])
 # Initialize the Vive headset
-#Vive.InitVive()
+Vive.InitVive()
 
 
 sound = viz.addAudio('resources/barber.mp3')
@@ -45,20 +45,9 @@ luigi.addAction(vizact.walkTo([-0.5, 0.0, 2],walkSpeed = 1.2))
 luigi.addAction(vizact.animation(14,speed=2))
 luigi.addAction(vizact.animation(14,speed=2))
 luigi.addAction(vizact.walkTo([-2.00277, -0.00000, 3.66770],walkSpeed =2))
-pos = [0,0,0]
+
 #viztask.schedule()
 #viztask.schedule(Actions.walk(luigi,[0,0,0]))
 
 
 #viztask.schedule(walka(luigi))
-import time
-def Events():
-	start = time.time()
-	#time.clock()    
-	elapsed = 0
-	seconds = 273
-	while elapsed < seconds:
-		elapsed = time.time() - start
-		print "loop cycle time: %f, seconds count: %02d" % (time.clock() , elapsed) 
-		#time.sleep(1) 
-		#Event 1
