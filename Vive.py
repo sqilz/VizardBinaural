@@ -16,7 +16,7 @@ def InitVive():
 
 	# setting starting camera position and rotation of the view
 	navigationNode.setEuler(180,0,0)
-	navigationNode.setPosition(0,0,4)
+	navigationNode.setPosition(0,-0.5,4)
 
 # setting starting camera position and rotation
 	viz.MainView.setEuler([180,0,0])

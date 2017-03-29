@@ -24,10 +24,17 @@ sound = viz.addAudio('resources/barber.mp3')
 sound.play()
 #load the characters
 #ground = viz.addChild('ground_grass.osgb')6
+
+#load guitar model
+guitar = viz.addChild('resources/guitar.osgb')
+
+
 luigi = viz.addAvatar('vcc_male.cfg')
 luigi.setPosition(-0.3,0,-2.82)
 #manuel = viz.addChild('vcc_male2.cfg')
+back = luigi.getBone('Bip01 Neck')
 
+viz.link(back,guitar)
 
 #viztask.schedule(Actions.walk(luigi,[-0.48, 0, -1.15234]))
 luigi.addAction(vizact.walkTo(	[-0.48, 0, -1.15234],walkSpeed =2.0))
@@ -37,9 +44,21 @@ luigi.addAction(vizact.turn(0,220))
 luigi.addAction(vizact.walkTo([-0.5, 0.0, 2],walkSpeed = 1.2))
 luigi.addAction(vizact.animation(14,speed=2))
 luigi.addAction(vizact.animation(14,speed=2))
-
+luigi.addAction(vizact.walkTo([-2.00277, -0.00000, 3.66770],walkSpeed =2))
+pos = [0,0,0]
 #viztask.schedule()
 #viztask.schedule(Actions.walk(luigi,[0,0,0]))
 
-#viztask.schedule(walka(luigi))
 
+#viztask.schedule(walka(luigi))
+import time
+def Events():
+	start = time.time()
+	#time.clock()    
+	elapsed = 0
+	seconds = 273
+	while elapsed < seconds:
+		elapsed = time.time() - start
+		print "loop cycle time: %f, seconds count: %02d" % (time.clock() , elapsed) 
+		#time.sleep(1) 
+		#Event 1
