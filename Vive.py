@@ -15,8 +15,8 @@ def InitVive():
 	viewLink.preMultLinkable(hmd.getSensor())
 
 	# setting starting camera position and rotation of the view
-	navigationNode.setEuler(180,0,0)
-	navigationNode.setPosition(0,-0.5,4)
+	navigationNode.setEuler(0,0,0)
+	navigationNode.setPosition(-1.5,0.3,3.2)
 
 # setting starting camera position and rotation
 	viz.MainView.setEuler([180,0,0])
