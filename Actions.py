@@ -16,4 +16,4 @@ def walka(a,pos):
 
 def speak(a):
 	say = vizact.speak('conversation.wav',scale = 0.004,morph = 'mouth_open')
-	yield a.addAction(say)
+	yield a.addAction(say) 
