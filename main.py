@@ -12,9 +12,8 @@ import Vive
 
 import level
 import time
-x = level.level()
 
-
+#level.level()
 
 # Initialize window
 viz.go()
