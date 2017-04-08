@@ -3,7 +3,13 @@ import vizact
 import viztask
 import time
 import vizshape
+import vizfx.postprocess
 
+
+		
+#Register the callback which to call the 'onKeyDown' function. 
+
+	
 #loading the scene
 gallery = viz.addChild('resources/barber_shop.osgb')
 door = gallery.getChild('door')

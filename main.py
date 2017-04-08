@@ -9,11 +9,9 @@ import vizact
 
 #importing project headers
 import Vive
-
 import level
 import time
 
-#level.level()
 
 
 
@@ -24,6 +22,27 @@ viz.update( viz.UPDATE_TIMERS )
 # comment this out if you want to use the Vive/Oculus/TrinusVR(SteamVR emulation)
 viz.MainView.setEuler([180,0,0])
 viz.MainView.setPosition([0,1.3,4])
+
+
+def loop():
+	
+	#postprocess - grey
+	#TODO: FIX ANGLE
+	import vizfx.postprocess
+	from vizfx.postprocess.color import GrayscaleEffect
+	effect = GrayscaleEffect()
+	vizfx.postprocess.addEffect(effect)
+	
+	while True:
+		print viz.MainView.getEuler()
+		if viz.MainView.getEuler() >= [160.0, -0.0, 0.0] and viz.MainView.getEuler() >= [-160.0, -0.0, 0.0]:
+			vizfx.postprocess.removeEffect(effect)
+		else:
+			vizfx.postprocess.addEffect(effect)
+			
+		
+#puts the function on a different thread to allow the while loop to run as the scene keeps going
+viz.director(loop)
 
 # Initialize the Vive headset
 #Vive.InitVive()
