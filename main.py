@@ -15,6 +15,8 @@ import time
 
 #level.level()
 
+
+
 # Initialize window
 viz.go()
 viz.update( viz.UPDATE_TIMERS )
