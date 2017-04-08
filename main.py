@@ -28,7 +28,7 @@ def Pause():
 	
 	#gray_effect = BlendEffect(None,effect),blend=0.0)
 	while True:
-		print viz.MainView.getPosition()
+	#	print viz.MainView.getPosition()
 		# if viewport yaw between 160-180
 		if viz.MainView.getEuler() >= [170.0, -0.0, 0.0] and viz.MainView.getEuler() <= [180.0, -0.0, 0.0]:
 			vizfx.postprocess.removeEffect(effect)
@@ -63,7 +63,7 @@ back = luigi.getBone('Bip01 Neck')
 link = viz.link(back,guitar)
 
 # luigi walking in, closing the door, and 'talking' to the user
-luigi.addAction(vizact.walkTo(	[-0.48, 0, -1.15234],walkSpeed =2.0))
+"""luigi.addAction(vizact.walkTo(	[-0.48, 0, -1.15234],walkSpeed =2.0))
 luigi.addAction(vizact.turn(160,220))
 luigi.addAction(vizact.animation(15,speed = 2.2))
 luigi.addAction(vizact.turn(0,220))
@@ -76,8 +76,8 @@ luigi.addAction(vizact.walkTo([-2, -0.00000, 6.02116],walkSpeed =2))
 luigi.addAction(vizact.animation(3,speed=0.7))
 luigi.addAction(vizact.turn(160,220))
 luigi.addAction(vizact.walkTo([-0.5, 0.0, 2],walkSpeed = 2))
-
-def walkNturn():
+"""
+def walkAndAnimate():
 	while True:
 		# yield waits until a task is finished before progressing to the next one
 		yield viztask.addAction(luigi, vizact.walkTo([2.4, 0, 2.57996],walkSpeed = 2))
@@ -86,7 +86,7 @@ def walkNturn():
 		# change the position and rotation of the linked guitar
 		link.setOffset([-0.5,0.05,-0])
 		link.setEuler([-45,0,70])
-		yield viztask.waitTime(13)
+		#yield viztask.waitTime(13)
 		upperarm = luigi.getbone('Bip01 L UpperArm')
 		upperarm.lock()
 		upperarm.setEuler(0,0,0)
@@ -98,17 +98,21 @@ def walkNturn():
 		hand = luigi.getBone('Bip01 L Hand')
 		hand.lock()
 		hand.setEuler(0,180,45)
+		luigi.addAction(vizact.animation(4,speed =2))		
 		
-		yield viztask.addAction(luigi, vizact.animation(4,speed = 0.1))
+		# kill task when done
+		animationTask.kill()
 		
-		
-viztask.schedule(walkNturn())
+# queue up the function as a task
+animationTask = viztask.schedule(walkAndAnimate())
 
 
-
-
-
-
-#viztask.schedule()
-#viztask.schedule(Actions.walk(luigi,[0,0,0]))
-#viztask.schedule(walka(luigi))
+def CheckTaskStatus():
+	while t.alive():
+		return True
+	else:
+		# when the t task finishes carry on from here
+		luigi.addAction(vizact.animation(6))
+	
+# runs function on a new thread
+viz.director(CheckTaskStatus)
