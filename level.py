@@ -29,8 +29,7 @@ tv.setEuler(0,40,0)
 video = viz.addVideo('resources/hale_bopp_1.mpg')
 video.play()
 video.loop()
-video.volume(1)
-
+#video.volume(1)
 
 #creating a plane that holds the video texture
 screen = vizshape.addPlane([0.9,0.55,0.9],axis = vizshape.AXIS_Z)
