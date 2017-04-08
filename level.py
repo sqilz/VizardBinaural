@@ -20,8 +20,9 @@ tv.setPosition(0,2.5,-2.2)
 tv.setEuler(0,40,0)
 
 # video texture
-video = viz.addVideo('resources/mefedron.3gp')
+video = viz.addVideo('resources/hale_bopp_1.mpg')
 video.play()
+video.loop()
 video.volume(1)
 
 
