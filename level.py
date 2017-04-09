@@ -1,15 +1,11 @@
-﻿import viz
+﻿# loading of the environment and few animations and models take place in this file
+# this artifact was created by Przemyslaw Hendel - UP739235
+# for CT6APPVR unit 
+import viz
 import vizact
 import viztask
-import time
 import vizshape
-import vizfx.postprocess
-
-
 		
-#Register the callback which to call the 'onKeyDown' function. 
-
-	
 #loading the scene
 gallery = viz.addChild('resources/barber_shop.osgb')
 door = gallery.getChild('door')

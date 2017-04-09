@@ -1,5 +1,9 @@
-﻿# sets up the Vive HMD
+﻿# this artifact was created by Przemyslaw Hendel - UP739235
+# for CT6APPVR unit 
+
+# sets up the Vive HMD, some code from the Vive example on moodle
 # no controllers needed for this artifact, therefore not initialized
+
 import viz
 import steamvr
 

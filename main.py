@@ -10,25 +10,29 @@ import vizact
 #importing project headers
 import Vive
 import level
-import time
 
 # Initialize window
 viz.go()
 viz.update( viz.UPDATE_TIMERS )
+
 # for editing while the vive is not being used/initialization commented out
 # comment this out if you want to use the Vive/Oculus/TrinusVR(SteamVR emulation)
 viz.MainView.setEuler([180,0,0])
 viz.MainView.setPosition([0,1.3,4])
 
-def Pause():
+# Initialize the Vive headset
+#Vive.InitVive()
+
+def pause():
 	#postprocess - greyscale
 	import vizfx.postprocess
 	from vizfx.postprocess.color import GrayscaleEffect
 	effect = GrayscaleEffect()
 	
-	#gray_effect = BlendEffect(None,effect),blend=0.0)
+	# applies a grey viewport postprocess dependant on the viewport rotation on Y axis
 	while True:
 	#	print viz.MainView.getPosition()
+	
 		# if viewport yaw between 160-180
 		if viz.MainView.getEuler() >= [170.0, -0.0, 0.0] and viz.MainView.getEuler() <= [180.0, -0.0, 0.0]:
 			vizfx.postprocess.removeEffect(effect)
@@ -38,13 +42,9 @@ def Pause():
 		else:
 			vizfx.postprocess.addEffect(effect)
 			
-			
-			
 # puts the function on a different thread to allow the while loop to run as the scene keeps going
-viz.director(Pause)
+viz.director(pause)
 
-# Initialize the Vive headset
-#Vive.InitVive()
 	
 # load and play the binaural recording
 sound = viz.addAudio('resources/barber.mp3')
@@ -63,7 +63,7 @@ back = luigi.getBone('Bip01 Neck')
 link = viz.link(back,guitar)
 
 # luigi walking in, closing the door, and 'talking' to the user
-"""luigi.addAction(vizact.walkTo(	[-0.48, 0, -1.15234],walkSpeed =2.0))
+luigi.addAction(vizact.walkTo(	[-0.48, 0, -1.15234],walkSpeed =2.0))
 luigi.addAction(vizact.turn(160,220))
 luigi.addAction(vizact.animation(15,speed = 2.2))
 luigi.addAction(vizact.turn(0,220))
@@ -76,7 +76,7 @@ luigi.addAction(vizact.walkTo([-2, -0.00000, 6.02116],walkSpeed =2))
 luigi.addAction(vizact.animation(3,speed=0.7))
 luigi.addAction(vizact.turn(160,220))
 luigi.addAction(vizact.walkTo([-0.5, 0.0, 2],walkSpeed = 2))
-"""
+
 def walkAndAnimate():
 	while True:
 		# yield waits until a task is finished before progressing to the next one
@@ -106,13 +106,14 @@ def walkAndAnimate():
 # queue up the function as a task
 animationTask = viztask.schedule(walkAndAnimate())
 
-
-def CheckTaskStatus():
-	while t.alive():
-		return True
+def checkTaskStatus():
+	while animationTask.alive():
+		# had to do this otherwise it doesn't work because vizard libraries don't allow checking for stuff finishing
+		print ''
 	else:
-		# when the t task finishes carry on from here
+		# when the animationTask finishes carry on from here because vizards libraries are bad 
+		# and the execution doesnt carry on from the place where the function was called like it should - animationTask
 		luigi.addAction(vizact.animation(6))
-	
+		
 # runs function on a new thread
-viz.director(CheckTaskStatus)
+viz.director(checkTaskStatus)
